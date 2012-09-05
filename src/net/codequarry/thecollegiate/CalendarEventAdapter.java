@@ -7,20 +7,20 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
 
-public class CalendarAdapter extends BaseAdapter {
+public class CalendarEventAdapter extends BaseAdapter {
 	
 	private Context context;
 	private int hour = 8;
 	private int minute = 0;
 	
-	public CalendarAdapter(Context context)
+	public CalendarEventAdapter(Context context)
 	{
 		this.context = context;
 	}
 	
 	public int getCount()
 	{
-		return 30;
+		return 120;
 	}
 	
 	public Object getItem(int position)
@@ -48,7 +48,8 @@ public class CalendarAdapter extends BaseAdapter {
 		
 		if(position % 8 == 0)
 		{
-			text.setText(hour + ":" + minute);
+			Time currentTime = new Time(hour, minute);
+			text.setText(currentTime.toString());
 			minute += 30;
 			if(minute == 60)
 			{

@@ -15,7 +15,7 @@ public class MainActivity extends Activity {
         GridView mainGrid = (GridView) findViewById(R.id.main_grid);
         mainGrid.setNumColumns(8); // One for times, seven for the days of the week
         
-        mainGrid.setAdapter(new CalendarAdapter(this));
+        mainGrid.setAdapter(new CalendarEventAdapter(this));
     }
 
     @Override
