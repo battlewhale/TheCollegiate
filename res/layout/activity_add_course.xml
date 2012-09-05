@@ -69,7 +69,10 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/add_course_header_times"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:paddingTop="5dp" >
 
     </LinearLayout>
     
