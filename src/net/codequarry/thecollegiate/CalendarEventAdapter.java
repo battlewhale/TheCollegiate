@@ -46,6 +46,11 @@ public class CalendarEventAdapter extends BaseAdapter {
 			text = (TextView) convertView;
 		}
 		
+		// So this essentially needs to:
+		// 1) find out the time and day based on the position
+		// 2) do an SQL query to see if anything is at that location
+		// 3) display nothing if there is nothing or the correct view if there is something
+		
 		if(position % 8 == 0)
 		{
 			Time currentTime = new Time(hour, minute);
