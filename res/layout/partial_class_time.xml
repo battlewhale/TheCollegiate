@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+		<ToggleButton
+		    android:id="@+id/day_one"
+		    android:layout_width="0dp"
+		    android:layout_weight=".14"
+		    android:layout_height="wrap_content"
+		    android:text="@+string/day_one_short"
+		    android:textOff="@string/day_one_short"
+		    android:textOn="@string/day_one_short" />
+		
+		<ToggleButton
+		    android:id="@+id/day_two"
+		    android:layout_width="0dp"
+		    android:layout_weight=".14"
+		    android:layout_height="wrap_content"
+		    android:text="@+string/day_two_short"
+		    android:textOff="@string/day_two_short"
+		    android:textOn="@string/day_two_short" />
+		
+		<ToggleButton
+		    android:id="@+id/day_three"
+		    android:layout_width="0dp"
+		    android:layout_weight=".14"
+		    android:layout_height="wrap_content"
+		    android:text="@+string/day_three_short"
+		    android:textOff="@string/day_three_short"
+		    android:textOn="@string/day_three_short" />
+		
+		<ToggleButton
+		    android:id="@+id/day_four"
+		    android:layout_width="0dp"
+		    android:layout_weight=".14"
+		    android:layout_height="wrap_content"
+		    android:text="@+string/day_four_short"
+		    android:textOff="@string/day_four_short"
+		    android:textOn="@string/day_four_short" />
+		
+		<ToggleButton
+		    android:id="@+id/day_five"
+		    android:layout_width="0dp"
+		    android:layout_weight=".14"
+		    android:layout_height="wrap_content"
+		    android:text="@+string/day_five_short"
+		    android:textOff="@string/day_five_short"
+		    android:textOn="@string/day_five_short" />
+		
+		<ToggleButton
+		    android:id="@+id/day_six"
+		    android:layout_width="0dp"
+		    android:layout_weight=".14"
+		    android:layout_height="wrap_content"
+		    android:text="@+string/day_six_short"
+		    android:textOff="@string/day_six_short"
+		    android:textOn="@string/day_six_short" />
+		
+		<ToggleButton
+		    android:id="@+id/day_sevene"
+		    android:layout_width="0dp"
+		    android:layout_weight=".14"
+		    android:layout_height="wrap_content"
+		    android:text="@+string/day_seven_short"
+		    android:textOff="@string/day_seven_short"
+		    android:textOn="@string/day_seven_short" />
+
+    </LinearLayout>
+
+</LinearLayout>

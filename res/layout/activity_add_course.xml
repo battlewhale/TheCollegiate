@@ -1,0 +1,76 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/add_course_header_information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="@+string/course_information"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:paddingTop="5dp"
+        android:paddingLeft="12dp" />
+    
+    <EditText
+        android:id="@+id/add_course_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/add_course_header_information"
+        android:ems="10"
+        android:hint="@string/course_code" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/add_course_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/add_course_code"
+        android:ems="10"
+        android:hint="@string/course_name" >
+    </EditText>
+
+    <EditText
+        android:id="@+id/add_course_professor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/add_course_name"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/professor_name" />
+
+    <TextView
+        android:id="@+id/add_course_header_times"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/add_course_professor"
+        android:text="@+string/class_times"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:paddingTop="5dp"
+        android:paddingLeft="12dp" />
+
+    <LinearLayout
+        android:id="@+id/add_course_classes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/add_course_header_times"
+        android:orientation="vertical" >
+
+    </LinearLayout>
+    
+</RelativeLayout>
