@@ -3,7 +3,6 @@ package net.codequarry.thecollegiate;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,12 +11,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 public class AddCourseActivity extends Activity
 {
 	LinearLayout layout;
 	LayoutInflater layoutInflater;
+	private CoursesDbAdapter courses;
 	
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -40,6 +41,8 @@ public class AddCourseActivity extends Activity
         Button endButton = (Button) findViewById(R.id.add_course_end);
         endButton.setOnFocusChangeListener(listener);
         endButton.setOnClickListener(listener);
+        
+        this.courses = new CoursesDbAdapter(this);
     }
 
     @Override
@@ -69,7 +72,15 @@ public class AddCourseActivity extends Activity
     
     public void saveCourse()
     {
+    	String courseCode = ((EditText) findViewById(R.id.add_course_code)).getText().toString();
+    	String courseName = ((EditText) findViewById(R.id.add_course_name)).getText().toString();
+    	String courseProfessor = ((EditText) findViewById(R.id.add_course_professor)).getText().toString();
     	
+    	this.courses.open();
+    	long courseId = this.courses.createCourse(courseName, courseProfessor, courseCode);
+    	this.courses.close();
+    	
+    	System.out.println(courseId);
     }
     
     class TimeOnClickListener implements OnClickListener, OnFocusChangeListener
