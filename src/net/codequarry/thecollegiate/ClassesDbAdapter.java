@@ -25,17 +25,18 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 /**
- * Simple course database access helper class. Defines the basic CRUD operations
- * for The Collegiate, and gives the ability to list all courses as well as
- * retrieve or modify a specific course.
+ * Simple class database access helper class. Defines the basic CRUD operations
+ * for The Collegiate, and gives the ability to list all classes as well as
+ * retrieve or modify a specific class.
  * 
  */
-public class CoursesDbAdapter {
+public class ClassesDbAdapter {
 
 	public static final String KEY_ROWID = "_id";
-	public static final String KEY_TITLE = "title";
-    public static final String KEY_PROFESSOR = "professor";
-    public static final String KEY_COURSECODE = "coursecode";
+    public static final String KEY_COURSEID = "courseid";
+    public static final String KEY_STARTTIME = "starttime";
+    public static final String KEY_ENDTIME = "endtime";
+    public static final String KEY_LOCATION = "location";
     
     private static final String TAG = "DbAdapter";
     private DatabaseHelper mDbHelper;
@@ -45,11 +46,11 @@ public class CoursesDbAdapter {
      * SQL statement that creates the table
      */
     private static final String DATABASE_CREATE =
-        "create table courses (_id integer primary key autoincrement, " +
-        "title text not null, professor text not null, coursecode text not null);";
+        "create table classes (_id integer primary key autoincrement, courseid int not null, " +
+        "starttime real not null, endtime real not null, location string not null);";
 
     private static final String DATABASE_NAME = "data";
-    private static final String DATABASE_TABLE = "courses";
+    private static final String DATABASE_TABLE = "classes";
     private static final int DATABASE_VERSION = 2;
 
     private final Context mCtx;
@@ -72,7 +73,7 @@ public class CoursesDbAdapter {
         {
             Log.w(TAG, "Upgrading database from version " + oldVersion + " to "
                     + newVersion + ", which will destroy all old data");
-            db.execSQL("DROP TABLE IF EXISTS courses");
+            db.execSQL("DROP TABLE IF EXISTS classes");
             onCreate(db);
         }
     }
@@ -83,13 +84,13 @@ public class CoursesDbAdapter {
      * 
      * @param ctx the Context within which to work
      */
-    public CoursesDbAdapter(Context ctx)
+    public ClassesDbAdapter(Context ctx)
     {
         this.mCtx = ctx;
     }
 
     /**
-     * Open the notes database. If it cannot be opened, try to create a new
+     * Open the classes database. If it cannot be opened, try to create a new
      * instance of the database. If it cannot be created, throw an exception to
      * signal the failure
      * 
@@ -97,7 +98,7 @@ public class CoursesDbAdapter {
      *         initialization call)
      * @throws SQLException if the database could be neither opened or created
      */
-    public CoursesDbAdapter open() throws SQLException
+    public ClassesDbAdapter open() throws SQLException
     {
         mDbHelper = new DatabaseHelper(mCtx);
         mDb = mDbHelper.getWritableDatabase();
@@ -111,58 +112,60 @@ public class CoursesDbAdapter {
 
 
     /**
-     * Create a new course using the title, professor, and coursecode. If the course is
+     * Create a new class using the courseid, starttime, endtime, location. If the class is
      * successfully created return the new rowId for that course, otherwise return
      * a -1 to indicate failure.
      * 
-     * @param title the title of the course
-     * @param professor the professor of the course
-     * @param coursecode the coursecode of the course
+     * @param courseid the courseid of the class
+     * @param starttime the starttime of the class
+     * @param endtime the endtime of the class
+     * @param location the location of the class
      * @return rowId or -1 if failed
      */
-    public long createCourse(String title, String professor, String coursecode)
+    public long createClass(int courseid, double starttime, double endtime, String location)
     {
         ContentValues initialValues = new ContentValues();
-        initialValues.put(KEY_TITLE, title);
-        initialValues.put(KEY_PROFESSOR, professor);
-        initialValues.put(KEY_COURSECODE, coursecode);
+        initialValues.put(KEY_COURSEID, courseid);
+        initialValues.put(KEY_STARTTIME, starttime);
+        initialValues.put(KEY_ENDTIME, endtime);
+        initialValues.put(KEY_LOCATION, location);
 
         return mDb.insert(DATABASE_TABLE, null, initialValues);
     }
 
     /**
-     * Delete the course with the given rowId
+     * Delete the class with the given rowId
      * 
-     * @param rowId id of course to delete
+     * @param rowId id of class to delete
      * @return true if deleted, false otherwise
      */
-    public boolean deleteCourse(long rowId)
+    public boolean deleteClass(long rowId)
     {
         return mDb.delete(DATABASE_TABLE, KEY_ROWID + "=" + rowId, null) > 0;
     }
 
     /**
-     * Return a Cursor over the list of all courses in the database
+     * Return a Cursor over the list of all classes in the database
      * 
-     * @return Cursor over all courses
+     * @return Cursor over all classes
      */
-    public Cursor fetchAllCourses()
+    public Cursor fetchAllClasses()
     {
-        return mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_TITLE,
-                KEY_PROFESSOR, KEY_COURSECODE}, null, null, null, null, null);
+        return mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_COURSEID,
+                KEY_STARTTIME, KEY_ENDTIME, KEY_LOCATION}, null, null, null, null, null);
     }
 
     /**
-     * Return a Cursor positioned at the course that matches the given rowId
+     * Return a Cursor positioned at the class that matches the given rowId
      * 
-     * @param rowId id of course to retrieve
-     * @return Cursor positioned to matching course, if found
-     * @throws SQLException if course could not be found/retrieved
+     * @param rowId id of class to retrieve
+     * @return Cursor positioned to matching class, if found
+     * @throws SQLException if class could not be found/retrieved
      */
-    public Cursor fetchCourse(long rowId) throws SQLException
+    public Cursor fetchClass(long rowId) throws SQLException
     {
         Cursor mCursor = mDb.query(true, DATABASE_TABLE, new String[] {KEY_ROWID,
-		                    KEY_TITLE, KEY_PROFESSOR, KEY_COURSECODE}, 
+		                    KEY_COURSEID, KEY_STARTTIME, KEY_ENDTIME, KEY_LOCATION}, 
 		                    KEY_ROWID + "=" + rowId, null, null, null, null, null);
         if (mCursor != null)
         {
@@ -173,21 +176,23 @@ public class CoursesDbAdapter {
     }
 
     /**
-     * Update the course using the details provided. The course to be updated is
-     * specified using the rowId, and it is altered to use params given
+     * Update the class using the details provided. The class to be updated is
+     * specified using the rowId, and it is altered to use the params given
      * 
-     * @param rowId id of course to update
-     * @param title value to set course title to
-     * @param professor value to set course professor to
-     * @param coursecode value to set course coursecode to
-     * @return true if the course was successfully updated, false otherwise
+     * @param rowId id of class to update
+     * @param courseid value to set courseid to
+     * @param starttime value to set start time to
+     * @param endtime value to set end time to
+     * @param location value to set location to
+     * @return true if the class was successfully updated, false otherwise
      */
-    public boolean updateCourse(long rowId, String title, String professor, String coursecode)
+    public boolean updateClass(long rowId, int courseid, double starttime, double endtime, String location)
     {
         ContentValues args = new ContentValues();
-        args.put(KEY_TITLE, title);
-        args.put(KEY_PROFESSOR, professor);
-        args.put(KEY_COURSECODE, coursecode);
+        args.put(KEY_COURSEID, courseid);
+        args.put(KEY_STARTTIME, starttime);
+        args.put(KEY_ENDTIME, endtime);
+        args.put(KEY_LOCATION, location);
 
         return mDb.update(DATABASE_TABLE, args, KEY_ROWID + "=" + rowId, null) > 0;
     }
