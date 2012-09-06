@@ -86,8 +86,7 @@
             android:id="@+id/add_course_start_hour"
             android:layout_width="0dp"
             android:layout_weight=".19"
-            android:layout_height="wrap_content"
-            <!--  android:onClick="AddCourseActivity::showTimePickerDialog" --> />
+            android:layout_height="wrap_content"  />
 
         <Spinner
             android:id="@+id/add_course_start_minute"
