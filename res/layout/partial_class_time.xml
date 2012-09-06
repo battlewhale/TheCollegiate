@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@drawable/grey_border"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingLeft="5dp"
     android:paddingRight="5dp"
     android:paddingTop="4dp"
-    android:paddingBottom="4dp" >
+    android:paddingBottom="4dp"
+    android:layout_marginBottom="100dp" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -68,7 +69,7 @@
 		    android:textOn="@string/day_six_short" />
 		
 		<ToggleButton
-		    android:id="@+id/day_sevene"
+		    android:id="@+id/day_seven"
 		    android:layout_width="0dp"
 		    android:layout_weight=".14"
 		    android:layout_height="wrap_content"
@@ -82,40 +83,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <Spinner
-            android:id="@+id/add_course_start_hour"
+        <Button
+            style="@android:style/Widget.EditText"
+            android:id="@+id/add_course_start"
             android:layout_width="0dp"
-            android:layout_weight=".19"
-            android:layout_height="wrap_content"  />
-
-        <Spinner
-            android:id="@+id/add_course_start_minute"
-            android:layout_width="0dp"
-            android:layout_weight=".24"
-            android:layout_height="wrap_content" />
+            android:layout_weight=".42"
+            android:layout_height="wrap_content"
+            android:text="@+string/start_time"  />
 
         <TextView
             android:id="@+id/add_course_too"
             android:layout_width="0dp"
-            android:layout_weight=".14"
+            android:layout_weight=".16"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingTop="9dp"
             android:text="@+string/to"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <Spinner
-            android:id="@+id/add_course_end_hour"
+        <Button
+            style="@android:style/Widget.EditText"
+            android:id="@+id/add_course_end"
             android:layout_width="0dp"
-            android:layout_weight=".24"
-            android:layout_height="wrap_content" />
-
-        <Spinner
-            android:id="@+id/add_course_end_minute"
-            android:layout_width="0dp"
-            android:layout_weight=".15"
-            android:layout_height="wrap_content" />
+            android:layout_weight=".42"
+            android:layout_height="wrap_content"
+            android:hint="@+string/end_time"   />
 
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/add_course_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textCapWords"
+        android:hint="@+string/location" >
+    </EditText>
 
 </LinearLayout>

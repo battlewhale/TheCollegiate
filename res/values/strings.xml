@@ -13,5 +13,10 @@
     <string name="class_times">Class Times</string>
     <string name="day_one">Monday</string><string name="day_two">Tuesday</string><string name="day_three">Wednesday</string><string name="day_four">Thursday</string><string name="day_five">Friday</string><string name="day_six">Saturday</string><string name="day_seven">Sunday</string><string name="day_one_short">M</string><string name="day_two_short">T</string><string name="day_three_short">W</string><string name="day_four_short">Th</string><string name="day_five_short">F</string><string name="day_six_short">S</string><string name="day_seven_short">Su</string>
     <string name="to">to</string>
+    <string name="start_time">Start Time</string>
+    <string name="end_time">End Time</string>
+    <string name="location">Location</string>
+    <string name="add_class">Add Class</string>
+    <string name="save">Save</string>
 
 </resources>
